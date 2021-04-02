@@ -1,13 +1,13 @@
-import 'package:flutter/material.dart';
-
-class SectionsModel with ChangeNotifier{
+class GetSectionModel {
+  bool success;
   List<Sections> sections;
 
-  SectionsModel({this.sections});
+  GetSectionModel({this.success, this.sections});
 
-  SectionsModel.fromJson(Map<String, dynamic> json) {
+  GetSectionModel.fromJson(Map<String, dynamic> json) {
+    success = json['success'];
     if (json['sections'] != null) {
-      sections = new List<Sections>();
+      sections = [];
       json['sections'].forEach((v) {
         sections.add(new Sections.fromJson(v));
       });
@@ -16,6 +16,7 @@ class SectionsModel with ChangeNotifier{
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['success'] = this.success;
     if (this.sections != null) {
       data['sections'] = this.sections.map((v) => v.toJson()).toList();
     }
@@ -23,7 +24,7 @@ class SectionsModel with ChangeNotifier{
   }
 }
 
-class Sections with ChangeNotifier {
+class Sections {
   Section section;
   List<Providers> providers;
 
@@ -31,9 +32,9 @@ class Sections with ChangeNotifier {
 
   Sections.fromJson(Map<String, dynamic> json) {
     section =
-    json['section'] != null ? new Section.fromJson(json['section']) : null;
+        json['section'] != null ? new Section.fromJson(json['section']) : null;
     if (json['providers'] != null) {
-      providers = new List<Providers>();
+      providers = [];
       json['providers'].forEach((v) {
         providers.add(new Providers.fromJson(v));
       });
@@ -52,7 +53,7 @@ class Sections with ChangeNotifier {
   }
 }
 
-class Section with ChangeNotifier{
+class Section {
   int id;
   String places;
   String nameAr;
@@ -63,12 +64,12 @@ class Section with ChangeNotifier{
 
   Section(
       {this.id,
-        this.places,
-        this.nameAr,
-        this.nameEn,
-        this.descriptionAr,
-        this.descriptionEn,
-        this.appImage});
+      this.places,
+      this.nameAr,
+      this.nameEn,
+      this.descriptionAr,
+      this.descriptionEn,
+      this.appImage});
 
   Section.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -121,29 +122,29 @@ class Providers {
 
   Providers(
       {this.id,
-        this.user,
-        this.bank,
-        this.bankaccountno,
-        this.bankaccountiban,
-        this.accountOwnerName,
-        this.tradename,
-        this.tradeImage,
-        this.profileDescription,
-        this.providerType,
-        this.serviceType,
-        this.publish,
-        this.accountStatus,
-        this.lastAvailable,
-        this.lastLocation,
-        this.deviceType,
-        this.osType,
-        this.osVersion,
-        this.onesignalId,
-        this.deviceModel,
-        this.deviceLanguage,
-        this.rejectMsg,
-        this.maxrate,
-        this.isonline});
+      this.user,
+      this.bank,
+      this.bankaccountno,
+      this.bankaccountiban,
+      this.accountOwnerName,
+      this.tradename,
+      this.tradeImage,
+      this.profileDescription,
+      this.providerType,
+      this.serviceType,
+      this.publish,
+      this.accountStatus,
+      this.lastAvailable,
+      this.lastLocation,
+      this.deviceType,
+      this.osType,
+      this.osVersion,
+      this.onesignalId,
+      this.deviceModel,
+      this.deviceLanguage,
+      this.rejectMsg,
+      this.maxrate,
+      this.isonline});
 
   Providers.fromJson(Map<String, dynamic> json) {
     id = json['id'];

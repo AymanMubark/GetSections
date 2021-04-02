@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_orders/get_sections.dart';
-import 'package:flutter_orders/sections_model.dart';
 import 'package:provider/provider.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -32,17 +31,20 @@ class _HomeScreenState extends State<HomeScreen> {
               break;
             case ConnectionState.done:
               if (snapShot.hasError) {
-                //  snapShot.error != null
-                // todo  handel error data
                 return Text("Error");
               } else {
-                print("Befor Prov ");
-                final prov =
-                    Provider.of<GetSectionsProvider>(context).providers;
-             //   final getSec = Provider.of<GetSectionsProvider>(context).items;
-
-                print("getSecdddd");
-                return Center(child: Text(prov.tradename.toString()));
+                return ListView(
+                  children: [
+                    for (var section
+                        in Provider.of<GetSectionsProvider>(context)
+                            .data
+                            .sections)
+                      for (var provider in section.providers)
+                        Text(
+                            "section ${section.section.nameAr}  proivder name" +
+                                provider.tradename)
+                  ],
+                );
               }
               break;
             default:
@@ -52,5 +54,4 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
     );
   }
-
 }
